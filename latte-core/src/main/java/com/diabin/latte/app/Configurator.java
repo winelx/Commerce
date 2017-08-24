@@ -1,4 +1,4 @@
-package com.diabin.app.latte;
+package com.diabin.latte.app;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -22,7 +22,7 @@ public class Configurator {
 
     //创建枚举，初始化枚举类
     private Configurator() {
-        initICOn();
+
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
     }
 
@@ -43,6 +43,7 @@ public class Configurator {
     }
 
     public final void configure() {
+        initICOn();
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
     }
 
@@ -64,15 +65,16 @@ public class Configurator {
         }
     }
 
-    private  void  initICOn(){
-        if (ICONS.size()>0){
-            final Iconify.IconifyInitializer initializer=Iconify.with(ICONS.get(0));
-        for (int i=1;i<=ICONS.size();i++){
-        initializer.with(ICONS.get(i));
-        }
+    private void initICOn() {
+        if (ICONS.size() > 0) {
+            final Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
         }
     }
-    public  final  Configurator withIcon(IconFontDescriptor descriptor){
+
+    public final Configurator withIcon(IconFontDescriptor descriptor) {
         ICONS.add(descriptor);
         return this;
     }

@@ -3,17 +3,16 @@ package com.winelx.Icon;
 import com.joanzapata.iconify.Icon;
 
 /**
- * Created by 10942 on 2017/8/23 0023.
+ * Created by 傅令杰 on 2017/3/29
  */
 
-public enum EcIcon implements Icon {
+public enum EcIcons implements Icon {
     icon_scan('\ue602'),
-
     icon_ali_pay('\ue606');
 
     private char character;
 
-    EcIcon(char character) {
+    EcIcons(char character) {
         this.character = character;
     }
 

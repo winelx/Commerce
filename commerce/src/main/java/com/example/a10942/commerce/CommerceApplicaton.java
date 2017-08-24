@@ -2,8 +2,9 @@ package com.example.a10942.commerce;
 
 import android.app.Application;
 
-import com.diabin.app.latte.latte;
+import com.diabin.latte.app.latte;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.winelx.Icon.FontEcModule;
 
 /**
  * @class name：com.example.a10942.commerce
@@ -16,7 +17,8 @@ public class CommerceApplicaton extends Application {
         super.onCreate();
         latte.init(this)
                 .withIcon(new FontAwesomeModule())
-                .withApiHost("")
+                .withIcon(new FontEcModule())
+                .withApiHost("http://127.0.0.17")
                 .configure();
     }
 }

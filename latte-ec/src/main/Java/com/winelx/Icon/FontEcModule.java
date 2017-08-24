@@ -4,7 +4,7 @@ import com.joanzapata.iconify.Icon;
 import com.joanzapata.iconify.IconFontDescriptor;
 
 /**
- * Created by 10942 on 2017/8/23 0023.
+ * Created by 傅令杰 on 2017/3/29
  */
 
 public class FontEcModule implements IconFontDescriptor {
@@ -15,6 +15,6 @@ public class FontEcModule implements IconFontDescriptor {
 
     @Override
     public Icon[] characters() {
-        return EcIcon.values();
+        return EcIcons.values();
     }
 }

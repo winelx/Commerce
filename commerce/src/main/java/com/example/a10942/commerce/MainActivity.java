@@ -1,14 +1,14 @@
 package com.example.a10942.commerce;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import com.diabin.latte.activities.ProxyActivity;
+import com.diabin.latte.delegates.LatteDelegate;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ProxyActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    public LatteDelegate setRootDelegare() {
+        return new ExampleDalegate();
     }
+
+
 }

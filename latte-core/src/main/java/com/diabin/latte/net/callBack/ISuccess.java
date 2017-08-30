@@ -5,5 +5,5 @@ package com.diabin.latte.net.callBack;
  */
 
 public interface ISuccess {
-    void onSuccess(int code, String msg);
+    void onSuccess(String msg);
 }

@@ -5,5 +5,5 @@ package com.diabin.latte.net.callBack;
  */
 
 public interface IFailure {
-    void IFailure();
+    void onIFailure();
 }

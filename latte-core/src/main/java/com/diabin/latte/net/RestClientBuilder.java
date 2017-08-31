@@ -1,9 +1,12 @@
 package com.diabin.latte.net;
 
+import android.content.Context;
+
 import com.diabin.latte.net.callBack.IError;
 import com.diabin.latte.net.callBack.IFailure;
 import com.diabin.latte.net.callBack.IRequest;
 import com.diabin.latte.net.callBack.ISuccess;
+import com.diabin.latte.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -24,9 +27,16 @@ public class RestClientBuilder {
     private IFailure mIFailure;
     private IError mIError;
     private RequestBody mBody;
+    private Context mContext;
+    private LoaderStyle mLoaderStyle;
 
     RestClientBuilder() {
+    }
 
+    public final RestClientBuilder loaderl(Context context) {
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.BallSpinFadeLoaderIndicator;
+        return this;
     }
 
     public final RestClientBuilder url(String url) {
@@ -70,6 +80,6 @@ public class RestClientBuilder {
     }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mContext);
     }
 }

@@ -1,5 +1,10 @@
 package com.diabin.latte.net.callBack;
 
+import android.os.Handler;
+
+import com.diabin.latte.ui.LattetLoader;
+import com.diabin.latte.ui.LoaderStyle;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -13,12 +18,16 @@ public class RequestCallbacks implements Callback<String> {
     private final ISuccess SUCCESS;
     private final IFailure IFAILURE;
     private final IError ERROR;
+    private final LoaderStyle mLoaderStyle;
+    private static final Handler HANDLER = new Handler();
+    private int a = 2000;
 
-    public RequestCallbacks(IRequest REQUEST, ISuccess SUCCESS, IFailure IFAILURE, IError ERROR) {
+    public RequestCallbacks(IRequest REQUEST, ISuccess SUCCESS, IFailure IFAILURE, IError ERROR, LoaderStyle loaderStyle) {
         this.REQUEST = REQUEST;
         this.SUCCESS = SUCCESS;
         this.IFAILURE = IFAILURE;
         this.ERROR = ERROR;
+        this.mLoaderStyle = loaderStyle;
     }
 
     @Override
@@ -34,6 +43,15 @@ public class RequestCallbacks implements Callback<String> {
                 ERROR.OnError(responsed.code(), responsed.message());
             }
         }
+        if (mLoaderStyle != null) {
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LattetLoader.stopLoading();
+                }
+            }, a);
+        }
+
     }
 
     @Override
@@ -45,4 +63,6 @@ public class RequestCallbacks implements Callback<String> {
             REQUEST.onRequestEnd();
         }
     }
+
+
 }

@@ -8,6 +8,7 @@ import com.diabin.latte.net.callBack.IRequest;
 import com.diabin.latte.net.callBack.ISuccess;
 import com.diabin.latte.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -26,10 +27,14 @@ public class RestClientBuilder {
     private ISuccess mISuccess;
     private IFailure mIFailure;
     private IError mIError;
+    private File falie;
     private RequestBody mBody;
     private Context mContext;
     private LoaderStyle mLoaderStyle;
 
+    private  String mDownloadDir=null;
+    private String mExtension=null;
+    private String mName=null;
     RestClientBuilder() {
     }
 
@@ -64,6 +69,11 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder failure(IFailure iFailure) {
+        this.mIFailure = iFailure;
+        return this;
+    }
+
     public final RestClientBuilder success(ISuccess iSuccess) {
         this.mISuccess = iSuccess;
         return this;
@@ -74,12 +84,17 @@ public class RestClientBuilder {
         return this;
     }
 
-    public final RestClientBuilder falie(IFailure iFailure) {
-        this.mIFailure = iFailure;
+    public final RestClientBuilder falie(File file) {
+        this.falie = file;
+        return this;
+    }
+
+    public final RestClientBuilder falie(String Path) {
+        this.falie = new File(Path);
         return this;
     }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mContext);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, falie, mBody, mLoaderStyle, mContext);
     }
 }

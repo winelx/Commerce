@@ -43,14 +43,7 @@ public class RequestCallbacks implements Callback<String> {
                 ERROR.OnError(responsed.code(), responsed.message());
             }
         }
-        if (mLoaderStyle != null) {
-            HANDLER.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    LattetLoader.stopLoading();
-                }
-            }, a);
-        }
+        stopLoding();
 
     }
 
@@ -62,7 +55,18 @@ public class RequestCallbacks implements Callback<String> {
         if (REQUEST != null) {
             REQUEST.onRequestEnd();
         }
+        stopLoding();
     }
 
+    private void stopLoding() {
+        if (mLoaderStyle != null) {
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LattetLoader.stopLoading();
+                }
+            }, a);
+        }
+    }
 
 }

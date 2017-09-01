@@ -24,7 +24,7 @@ public class RestCreator {
         return ParamsHolder.PARAMS;
     }
 
-    public static RestService getRestServiice() {
+    public static RestService getRestService() {
         return RestServiceHolder.REST_SREVICE;
     }
 
@@ -50,4 +50,6 @@ public class RestCreator {
         private static final RestService REST_SREVICE =
                 RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
     }
+
+
 }

@@ -12,15 +12,24 @@ import java.util.HashMap;
 public final class latte {
 
     public static Configurator init(Context context) {
-        getCOnfigurations().put(ConfigType.APPLICATION_CONTEXR.name(), context.getApplicationContext());
+        getConfigurations().put(ConfigType.APPLICATION_CONTEXR.name(), context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String, Object> getCOnfigurations() {
+    public static HashMap<Object, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
     }
 
-    public static Context geteApplication() {
-        return (Context) getCOnfigurations().get(ConfigType.APPLICATION_CONTEXR.name());
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
     }
+
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
+    }
+
+    public static Context geteApplication() {
+        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXR.name());
+    }
+
 }

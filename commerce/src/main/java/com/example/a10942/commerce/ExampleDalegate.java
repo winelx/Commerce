@@ -29,30 +29,6 @@ public class ExampleDalegate extends LatteDelegate {
 
     private void text() {
 
-        RestClient.Builder()
-                .url("http://127.0.0.1/index")
-                .loaderl(getContext())
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String msg) {
-                       Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .error(new IError() {
-                    @Override
-                    public void OnError(int code, String msg) {
 
-                    }
-                })
-
-                .failure(new IFailure() {
-                    @Override
-                    public void onIFailure() {
-
-                    }
-                })
-
-                .build()
-                .get();
     }
 }

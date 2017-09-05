@@ -9,6 +9,8 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.diabin.latte.delegates.LatteDelegate;
 import com.diabin.latte.ui.scanner.LauncherHolderCreator;
+import com.diabin.latte.ui.scanner.ScrollLauncherTag;
+import com.diabin.latte.util.storage.LattePreference;
 import com.example.latteec.ec.R;
 
 import java.util.ArrayList;
@@ -22,10 +24,11 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
     private static final ArrayList<Integer> INTEGERS = new ArrayList<>();
 
     public void initBanner() {
+        //启动页的轮播图片
         INTEGERS.add(R.mipmap.img_6);
         INTEGERS.add(R.mipmap.img_7);
         INTEGERS.add(R.mipmap.img_8);
-
+        //设置Banner数据
         mIntegerConvenientBanner
                 .setPages(new LauncherHolderCreator(), INTEGERS)
                 .setPageIndicator(new int[]{R.drawable.dot_normal, R.drawable.dot_focus})
@@ -48,6 +51,9 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
 
     @Override
     public void onItemClick(int position) {
-
+        if (position == INTEGERS.size() - 1) {
+            LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
+            //检查用户是否登陆
+        }
     }
 }

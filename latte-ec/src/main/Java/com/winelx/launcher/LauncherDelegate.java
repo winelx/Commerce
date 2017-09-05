@@ -7,8 +7,10 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.diabin.latte.delegates.LatteDelegate;
+import com.diabin.latte.ui.scanner.ScrollLauncherTag;
 import com.diabin.latte.util.Timer.BaseTImerTask;
 import com.diabin.latte.util.Timer.ITimerListener;
+import com.diabin.latte.util.storage.LattePreference;
 import com.example.latteec.ec.R;
 import com.example.latteec.ec.R2;
 
@@ -35,6 +37,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
+            chaecLauncher();
         }
     }
 
@@ -43,6 +46,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         final BaseTImerTask task = new BaseTImerTask(this);
         mTimer.schedule(task, 0, 1000);
     }
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_launcher;
@@ -66,11 +70,19 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
                         if (mTimer != null) {
                             mTimer.cancel();
                             mTimer = null;
-
+                            chaecLauncher();
                         }
                     }
                 }
             }
         });
     }
+
+    //判断是否显示滑动启动页
+    public void chaecLauncher() {
+        if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
+            start(new LauncherScrollDelegate(), SINGLETASK);
+        }
+    }
+
 }

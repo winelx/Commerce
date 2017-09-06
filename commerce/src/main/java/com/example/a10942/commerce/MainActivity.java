@@ -3,12 +3,16 @@ package com.example.a10942.commerce;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.widget.Toast;
 
 import com.diabin.latte.activities.ProxyActivity;
+import com.diabin.latte.app.latte;
 import com.diabin.latte.delegates.LatteDelegate;
-import com.winelx.singn.SingUpDelegator;
+import com.winelx.singn.ISignLiastener;
+import com.winelx.singn.SigninDetegate;
 
-public class MainActivity extends ProxyActivity {
+
+public class MainActivity extends ProxyActivity implements ISignLiastener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,6 +25,16 @@ public class MainActivity extends ProxyActivity {
 
     @Override
     public LatteDelegate setRootDelegare() {
-        return new SingUpDelegator();
+        return new SigninDetegate();
+    }
+
+    @Override
+    public void onSignInSuccess() {
+
+    }
+
+    @Override
+    public void onSignUpSuccess() {
+        Toast.makeText(latte.geteApplication(), "注册成功", Toast.LENGTH_SHORT).show();
     }
 }

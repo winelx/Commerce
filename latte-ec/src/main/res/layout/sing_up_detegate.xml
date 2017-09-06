@@ -17,7 +17,7 @@
             android:text="注册"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"/>
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.NestedScrollView
@@ -38,7 +38,7 @@
                 android:layout_height="72dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/ic_launcher"/>
 
             <!--姓名-->
             <android.support.design.widget.TextInputLayout
@@ -53,9 +53,9 @@
                     android:layout_height="wrap_content"
                     android:hint="姓名"
                     android:inputType="textPersonName"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"/>
             </android.support.design.widget.TextInputLayout>
-              <!--邮箱-->
+            <!--邮箱-->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:hint="邮箱"
                     android:inputType="textEmailAddress"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"/>
             </android.support.design.widget.TextInputLayout>
 
             <!--手机号码-->
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:hint="手机号码"
                     android:inputType="phone"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"/>
             </android.support.design.widget.TextInputLayout>
 
             <!--密码-->
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:hint="密码"
                     android:inputType="textPassword"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"/>
             </android.support.design.widget.TextInputLayout>
 
             <!--重复密码-->
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:hint="重复密码"
                     android:inputType="textPassword"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
@@ -130,7 +130,7 @@
                 android:padding="12dp"
                 android:text="注册"
                 android:textColor="@android:color/white"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_link_sign_in"
@@ -140,7 +140,7 @@
                 android:gravity="center"
                 android:text="已经注册了？请登录"
                 android:textSize="16sp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"/>
 
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v4.widget.NestedScrollView>

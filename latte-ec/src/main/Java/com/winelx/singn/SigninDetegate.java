@@ -1,5 +1,6 @@
 package com.winelx.singn;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,9 @@ import android.support.design.widget.TextInputEditText;
 import android.view.View;
 
 import com.diabin.latte.delegates.LatteDelegate;
+import com.diabin.latte.net.RestClient;
+import com.diabin.latte.net.callBack.ISuccess;
+import com.diabin.latte.util.log.LatteLogger;
 import com.example.latteec.ec.R;
 import com.example.latteec.ec.R2;
 
@@ -28,19 +32,33 @@ public class SigninDetegate extends LatteDelegate {
     @BindView(R2.id.edit_sign_in_password)
     TextInputEditText mPassword = null;
 
+    private ISignLiastener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignLiastener) {
+            mISignListener = (ISignLiastener) activity;
+        }
+    }
+
+
     @OnClick(R2.id.btn_sign_in)
     void onclicksignin() {
         if (checkForm()) {
-//        RestClient.Builder()
-//                .url()
-//                .params("", "")
-//                .success(new ISuccess() {
-//                    @Override
-//                    public void onSuccess(String msg) {
-//
-//                    }
-//                })
-//               .build();
+            RestClient.Builder()
+                    .url("http://116.196.95.67/RestServer/api/user_profile.php")
+                    .params("email", mEmail.getText().toString())
+                    .params("password", mPassword.getText().toString())
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSuccess(String response) {
+                            LatteLogger.json("USER_PROFILE", response);
+                            SignHandler .onSignIn(response, mISignListener);
+                        }
+                    })
+                    .build()
+                    .post();
         }
 
     }

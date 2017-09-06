@@ -1,12 +1,17 @@
 package com.winelx.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.diabin.latte.app.AccountManager;
+import com.diabin.latte.app.IUserChecker;
 import com.diabin.latte.delegates.LatteDelegate;
+import com.diabin.latte.ui.loader.ILauncherListener;
+import com.diabin.latte.ui.loader.OnLauncherFinishTag;
 import com.diabin.latte.ui.scanner.ScrollLauncherTag;
 import com.diabin.latte.util.Timer.BaseTImerTask;
 import com.diabin.latte.util.Timer.ITimerListener;
@@ -31,6 +36,15 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
 
     private Timer mTimer = null;
     private int mCount = 5;
+    private ILauncherListener mILauncherListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
 
     @OnClick(R2.id.tv_launcher_timer)
     void onClicKTimerView() {
@@ -58,6 +72,31 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         initTimer();
     }
 
+    //判断是否显示滑动启动页
+    public void chaecLauncher() {
+        if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
+            start(new LauncherScrollDelegate(), SINGLETASK);
+        } else {
+            //检查用户是否登陆
+            AccountManager.CheckAccount(new IUserChecker() {
+                @Override
+                public void onsignIn() {
+                    //已经登陆
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+                @Override
+                public void onNotSignIN() {
+                    //没有登陆
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
+        }
+    }
+
     @Override
     public void onTimer() {
         getProxyActivity().runOnUiThread(new Runnable() {
@@ -78,11 +117,5 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         });
     }
 
-    //判断是否显示滑动启动页
-    public void chaecLauncher() {
-        if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LauncherScrollDelegate(), SINGLETASK);
-        }
-    }
 
 }

@@ -25,7 +25,7 @@ public class SignHandler {
 
         //已经注册并登录成功了
         AccountManager.setSignState(true);
-        signListener.onSignUpSuccess();
+        signListener.onSignInSuccess();
     }
 
 

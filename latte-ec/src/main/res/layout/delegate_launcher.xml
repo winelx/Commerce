@@ -18,4 +18,19 @@
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="16sp"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/index_bottom"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp"
+        android:background="#0d0d0c"
+        android:gravity="center"
+        android:text="进入首页"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+
 </RelativeLayout>

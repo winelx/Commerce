@@ -20,6 +20,7 @@ import butterknife.OnClick;
 
 /**
  * Created by 10942 on 2017/9/5 0005.
+ * 注册界面
  */
 
 public class SingUpDelegate extends LatteDelegate {

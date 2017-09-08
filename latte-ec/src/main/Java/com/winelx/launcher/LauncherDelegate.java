@@ -28,6 +28,7 @@ import butterknife.OnClick;
 /**
  * Created by 10942 on 2017/9/4 0004.
  * tv_launcher_timer
+ * 启动页
  */
 
 public class LauncherDelegate extends LatteDelegate implements ITimerListener {
@@ -53,6 +54,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
             mTimer = null;
             chaecLauncher();
         }
+
     }
 
     private void initTimer() {
@@ -86,6 +88,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
                         mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
                     }
                 }
+
                 @Override
                 public void onNotSignIN() {
                     //没有登陆

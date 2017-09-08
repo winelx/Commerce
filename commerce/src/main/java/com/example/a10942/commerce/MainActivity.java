@@ -10,9 +10,9 @@ import com.diabin.latte.app.latte;
 import com.diabin.latte.delegates.LatteDelegate;
 import com.diabin.latte.ui.loader.ILauncherListener;
 import com.diabin.latte.ui.loader.OnLauncherFinishTag;
-import com.winelx.launcher.LauncherScrollDelegate;
+import com.winelx.mian.EcBottomDelegate;
+import com.winelx.mian.index.IndexDelegate;
 import com.winelx.singn.ISignLiastener;
-import com.winelx.singn.SigninDetegate;
 import com.winelx.singn.SingUpDelegate;
 
 
@@ -31,7 +31,7 @@ public class MainActivity extends ProxyActivity implements ILauncherListener,
     //这里设置第一个界面
     @Override
     public LatteDelegate setRootDelegare() {
-        return new LauncherScrollDelegate();
+        return new EcBottomDelegate();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MainActivity extends ProxyActivity implements ILauncherListener,
             case SIGNED:
                 //已经登陆的操作
                 Toast.makeText(latte.geteApplication(), "检测到用户已登陆", Toast.LENGTH_LONG).show();
-                getSupportDelegate().startWithPop(new SigninDetegate());
+                getSupportDelegate().startWithPop(new IndexDelegate());
                 break;
             case NOT_SIGNED:
                 //未登录的操作

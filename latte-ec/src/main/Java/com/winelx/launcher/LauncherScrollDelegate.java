@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -17,11 +18,13 @@ import com.diabin.latte.ui.scanner.LauncherHolderCreator;
 import com.diabin.latte.ui.scanner.ScrollLauncherTag;
 import com.diabin.latte.util.storage.LattePreference;
 import com.example.latteec.ec.R;
+import com.winelx.mian.EcBottomDelegate;
 
 import java.util.ArrayList;
 
 /**
  * Created by 10942 on 2017/9/4 0004.
+ * 引导页
  */
 
 public class LauncherScrollDelegate extends LatteDelegate implements OnItemClickListener {
@@ -50,6 +53,25 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
                 .setPageIndicator(new int[]{R.drawable.dot_normal, R.drawable.dot_focus})
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setOnItemClickListener(this)
+                .setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        if (position == INTEGERS.size() - 1) {
+                            LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
+                            getSupportDelegate().start(new EcBottomDelegate(), SINGLETASK);
+                        }
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                })
                 .setCanLoop(false);
     }
 

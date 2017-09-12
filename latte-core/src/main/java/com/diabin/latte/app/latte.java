@@ -1,6 +1,7 @@
 package com.diabin.latte.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
 
@@ -10,9 +11,12 @@ import java.util.HashMap;
  * @time 2017/8/21 0021 10:57
  */
 public final class latte {
-
     public static Configurator init(Context context) {
         getConfigurations().put(ConfigType.APPLICATION_CONTEXR.name(), context.getApplicationContext());
+        return Configurator.getInstance();
+    }
+
+    public static Configurator getConfigurator() {
         return Configurator.getInstance();
     }
 
@@ -20,16 +24,15 @@ public final class latte {
         return Configurator.getInstance().getLatteConfigs();
     }
 
-    public static Configurator getConfigurator() {
-        return Configurator.getInstance();
+    public static <T> T getConfiguration(Enum<ConfigType> key) {
+        return Configurator.getInstance().getConfiguration(key);
     }
 
-    public static <T> T getConfiguration(Object key) {
-        return getConfigurator().getConfiguration(key);
+    public static Handler getHandler() {
+        return getConfiguration(ConfigType.HANDLER);
     }
 
     public static Context geteApplication() {
         return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXR.name());
     }
-
 }

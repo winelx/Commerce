@@ -1,5 +1,7 @@
 package com.diabin.latte.app;
 
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -22,11 +24,13 @@ public class Configurator {
     //字体存储
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<IconFontDescriptor>();
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
     //创建枚举，初始化枚举类
     private Configurator() {
 
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
+        LATTE_CONFIGS.put(ConfigType.HANDLER.name(), HANDLER);
     }
 
     final HashMap<Object, Object> getLatteConfigs() {
@@ -37,12 +41,12 @@ public class Configurator {
      * 线程安全单例实现
      */
     static Configurator getInstance() {
-        return Holder.INSTANCE;
+        return Holder.configurator;
     }
 
     //实现configurator，用静态的方法。
     private static class Holder {
-        private static final Configurator INSTANCE = new Configurator();
+        private static final Configurator configurator = new Configurator();
     }
 
     public final void configure() {
@@ -55,20 +59,11 @@ public class Configurator {
         return this;
     }
 
-//    @SuppressWarnings("unchecked")
-//    final <T> Object getConfiguration(Enum<ConfigType> key) {
-//        checkCOnfiguration();
-//        return (T) LATTE_CONFIGS.get(key.name());
-//    }
-
     @SuppressWarnings("unchecked")
-    final <T> T getConfiguration(Object key) {
+
+    public final <T> T getConfiguration(Enum<ConfigType> key) {
         checkCOnfiguration();
-        final Object value = LATTE_CONFIGS.get(key);
-        if (value == null) {
-            throw new NullPointerException(key.toString() + " IS NULL");
-        }
-        return (T) LATTE_CONFIGS.get(key);
+        return (T) LATTE_CONFIGS.get(key.name());
     }
 
     private void checkCOnfiguration() {
@@ -97,6 +92,7 @@ public class Configurator {
         LATTE_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
         return this;
     }
+
     public final Configurator withInterceptors(ArrayList<Interceptor> list) {
         INTERCEPTORS.addAll(list);
         LATTE_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);

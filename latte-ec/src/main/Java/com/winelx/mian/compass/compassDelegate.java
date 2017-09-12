@@ -24,8 +24,5 @@ public class compassDelegate extends BottomItemDalegate {
 
     }
 
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        return false;
-    }
+
 }

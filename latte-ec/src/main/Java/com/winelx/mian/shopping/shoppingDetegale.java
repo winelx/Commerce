@@ -24,8 +24,4 @@ public class shoppingDetegale extends BottomItemDalegate {
 
     }
 
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        return false;
-    }
 }

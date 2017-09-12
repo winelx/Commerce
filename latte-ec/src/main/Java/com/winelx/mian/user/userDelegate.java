@@ -3,7 +3,6 @@ package com.winelx.mian.user;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
 import android.view.View;
 
 import com.diabin.latte.delegates.bottom.BottomItemDalegate;
@@ -24,8 +23,4 @@ public class userDelegate extends BottomItemDalegate {
 
     }
 
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        return false;
-    }
 }

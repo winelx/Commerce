@@ -10,7 +10,7 @@ import com.diabin.latte.app.latte;
 import com.diabin.latte.delegates.LatteDelegate;
 import com.diabin.latte.ui.loader.ILauncherListener;
 import com.diabin.latte.ui.loader.OnLauncherFinishTag;
-import com.winelx.mian.EcBottomDelegate;
+import com.winelx.launcher.LauncherScrollDelegate;
 import com.winelx.mian.index.IndexDelegate;
 import com.winelx.singn.ISignLiastener;
 import com.winelx.singn.SingUpDelegate;
@@ -31,7 +31,7 @@ public class MainActivity extends ProxyActivity implements ILauncherListener,
     //这里设置第一个界面
     @Override
     public LatteDelegate setRootDelegare() {
-        return new EcBottomDelegate();
+        return new LauncherScrollDelegate();
     }
 
     @Override

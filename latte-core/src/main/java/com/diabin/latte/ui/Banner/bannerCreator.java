@@ -2,7 +2,6 @@ package com.diabin.latte.ui.Banner;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.diabin.latte.ui.recytcler.MultipleRecyclerAdapter;
 import com.example.latte.R;
 
@@ -19,7 +18,7 @@ public class bannerCreator {
             MultipleRecyclerAdapter clickListener) {
         convenientBanner
                 .setPages(new HolderCreator(), banenrs)
-                .setPageIndicator(new int[]{R.mipmap.img_6, R.mipmap.img_7})
+                .setPageIndicator(new int[]{R.drawable.dot_normal, R.drawable.dot_focus})
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setOnItemClickListener(clickListener)
                 .setPageTransformer(new DefaultTransformer())

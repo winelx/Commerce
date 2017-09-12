@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder>
-        implements BaseQuickAdapter.SpanSizeLookup,OnItemClickListener {
+        implements BaseQuickAdapter.SpanSizeLookup, OnItemClickListener {
     //确保初始化一次Banner，防止重复Item加载
     private boolean mIsInitBanner = false;
     //图片加载的策略
@@ -47,40 +47,37 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
 
     //数据转换
     @Override
-    protected void convert(MultipleViewHolder holder, MultipleItemEntity item) {
+    protected void convert(MultipleViewHolder holder, MultipleItemEntity entity) {
         final String text;
-        final String imgUrl;
-        final ArrayList<String> bannerImage;
+        final String imageUrl;
+        final ArrayList<String> bannerImages;
         switch (holder.getItemViewType()) {
             case ItemType.TEXT:
-                text = item.getFiled(MultipleFields.TEXT);
+                text = entity.getFiled(MultipleFields.TEXT);
                 holder.setText(R.id.tv_single, text);
                 break;
             case ItemType.IMAGE:
-                imgUrl = item.getFiled(MultipleFields.IMAGE_URL);
+                imageUrl = entity.getFiled(MultipleFields.IMAGE_URL);
                 Glide.with(mContext)
-                        .load(imgUrl)
+                        .load(imageUrl)
                         .apply(RECYCLER_OPTIONS)
                         .into((ImageView) holder.getView(R.id.img_single));
-
                 break;
             case ItemType.TEXT_IMAGE:
-                text = item.getFiled(MultipleFields.TEXT);
-                imgUrl = item.getFiled(MultipleFields.IMAGE_URL);
-                holder.setText(R.id.img_multiple, text);
+                text = entity.getFiled(MultipleFields.TEXT);
+                imageUrl = entity.getFiled(MultipleFields.IMAGE_URL);
                 Glide.with(mContext)
-                        .load(imgUrl)
+                        .load(imageUrl)
                         .apply(RECYCLER_OPTIONS)
-                        .into((ImageView) holder.getView(R.id.tv_multiple));
-
+                        .into((ImageView) holder.getView(R.id.img_multiple));
+                holder.setText(R.id.tv_multiple, text);
                 break;
             case ItemType.BANNER:
                 if (!mIsInitBanner) {
-                    bannerImage = item.getFiled(MultipleFields.BANNERS);
-                    final ConvenientBanner<String> convenientBanner =
-                            holder.getView(R.id.banner_recycler_item);
-                    bannerCreator.seDefault(convenientBanner, bannerImage, this);
-                    mIsInitBanner=true;
+                    bannerImages = entity.getFiled(MultipleFields.BANNERS);
+                    final ConvenientBanner<String> convenientBanner = holder.getView(R.id.banner_recycler_item);
+                    bannerCreator.seDefault(convenientBanner, bannerImages, this);
+                    mIsInitBanner = true;
                 }
                 break;
             default:
@@ -111,9 +108,12 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
     protected MultipleViewHolder createBaseViewHolder(View view) {
         return MultipleViewHolder.create(view);
     }
+
     //点击事件处理
     @Override
     public void onItemClick(int position) {
 
     }
+
+
 }

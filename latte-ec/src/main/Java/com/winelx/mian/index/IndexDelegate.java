@@ -5,22 +5,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.diabin.latte.delegates.bottom.BottomItemDalegate;
-import com.diabin.latte.net.RestClient;
-import com.diabin.latte.net.callBack.ISuccess;
-import com.diabin.latte.ui.recytcler.MultipleFields;
-import com.diabin.latte.ui.recytcler.MultipleItemEntity;
 import com.diabin.latte.ui.refresh.RefreshHandler;
 import com.example.latteec.ec.R;
 import com.example.latteec.ec.R2;
 import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -30,7 +24,7 @@ import butterknife.BindView;
 
 public class IndexDelegate extends BottomItemDalegate {
     @BindView(R2.id.index_sw)
-    SwipeRefreshLayout mswip = null;
+    SwipeRefreshLayout mRefreshLayout = null;
     @BindView(R2.id.index_rec)
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.index_toolbar)
@@ -44,29 +38,17 @@ public class IndexDelegate extends BottomItemDalegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        mRefreshHandler = new RefreshHandler(mswip);
-        RestClient.Builder()
-                .url("http://116.196.95.67/RestServer/api/")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String msg) {
-                        final IndexDataConverter converter = new IndexDataConverter();
-                        converter.setJsonData(msg);
-                        final ArrayList<MultipleItemEntity> list = converter.convert();
-                        final String image = list.get(1).getFiled(MultipleFields.IMAGE_URL);
-                        Toast.makeText(getActivity(), image, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build()
-                .get();
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
+
     }
+
     private void initRefreshLayout() {
-        mswip.setColorSchemeResources(
+        mRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_red_dark
         );
-        mswip.setProgressViewOffset(true, 80, 150);
+        mRefreshLayout.setProgressViewOffset(true, 80, 150);
     }
 
     @Override
@@ -79,7 +61,13 @@ public class IndexDelegate extends BottomItemDalegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        initRecyclerVIew();
         mRefreshHandler.firstpage("http://116.196.95.67/RestServer/api/");
 
+    }
+
+    private  void  initRecyclerVIew(){
+        final GridLayoutManager manager=new GridLayoutManager(getContext(),4);
+        mRecyclerView.setLayoutManager(manager);
     }
 }

@@ -15,6 +15,8 @@ import com.winelx.mian.index.IndexDelegate;
 import com.winelx.singn.ISignLiastener;
 import com.winelx.singn.SingUpDelegate;
 
+import qiu.niorgai.StatusBarCompat;
+
 
 public class MainActivity extends ProxyActivity implements ILauncherListener,
         ISignLiastener {
@@ -26,6 +28,8 @@ public class MainActivity extends ProxyActivity implements ILauncherListener,
         if (actionBar != null) {
             actionBar.hide();
         }
+       latte.getConfigurator().withActivity(this);
+        StatusBarCompat.translucentStatusBar(this, true);
     }
 
     //这里设置第一个界面

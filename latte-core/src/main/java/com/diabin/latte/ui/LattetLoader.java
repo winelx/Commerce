@@ -22,15 +22,15 @@ public class LattetLoader {
     private static final int LOADER_OFFSET_SCALE = 10;
 
     private static final ArrayList<AppCompatDialog> LOADERS = new ArrayList<>();
-    private static final String DEFEAULT_lOADER = LoaderStyle.BallGridPulseIndicator.name();
+    private static final String DEFEAULT_lOADER = com.diabin.latte.ui.LoaderStyle.BallGridPulseIndicator.name();
 
-    public static void showLoading(Context context, Enum<LoaderStyle> type) {
+    public static void showLoading(Context context, Enum<com.diabin.latte.ui.LoaderStyle> type) {
         showLoading(context, type.name());
     }
 
     public static void showLoading(Context context, String args) {
         final AppCompatDialog dialog = new AppCompatDialog(context, R.style.dialog);
-        final AVLoadingIndicatorView avLoadingIndicatorView = LoaderCreator.crreate(args, context);
+        final AVLoadingIndicatorView avLoadingIndicatorView = com.diabin.latte.ui.LoaderCreator.crreate(args, context);
         dialog.setContentView(avLoadingIndicatorView);
         //获取屏幕的宽高
         int deviceWidth = DimenUtil.getScreenWidth();

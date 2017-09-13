@@ -1,8 +1,8 @@
 package com.diabin.latte.ui.recytcler;
 
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
@@ -61,7 +61,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                 Glide.with(mContext)
                         .load(imageUrl)
                         .apply(RECYCLER_OPTIONS)
-                        .into((ImageView) holder.getView(R.id.img_single));
+                        .into((AppCompatImageView) holder.getView(R.id.img_single));
                 break;
             case ItemType.TEXT_IMAGE:
                 text = entity.getFiled(MultipleFields.TEXT);
@@ -69,7 +69,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                 Glide.with(mContext)
                         .load(imageUrl)
                         .apply(RECYCLER_OPTIONS)
-                        .into((ImageView) holder.getView(R.id.img_multiple));
+                        .into((AppCompatImageView) holder.getView(R.id.img_multiple));
                 holder.setText(R.id.tv_multiple, text);
                 break;
             case ItemType.BANNER:

@@ -3,6 +3,7 @@ package com.winelx.mian.index;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,10 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.diabin.latte.delegates.bottom.BottomItemDalegate;
+import com.diabin.latte.ui.recytcler.baseDecoration;
 import com.diabin.latte.ui.refresh.RefreshHandler;
 import com.example.latteec.ec.R;
 import com.example.latteec.ec.R2;
 import com.joanzapata.iconify.widget.IconTextView;
+import com.winelx.mian.EcBottomDelegate;
 
 import butterknife.BindView;
 
@@ -33,6 +36,7 @@ public class IndexDelegate extends BottomItemDalegate {
     AppCompatEditText search_view = null;
     @BindView(R2.id.icon_index_message)
     IconTextView message = null;
+
 
     private RefreshHandler mRefreshHandler = null;
 
@@ -62,12 +66,19 @@ public class IndexDelegate extends BottomItemDalegate {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
         initRecyclerVIew();
-        mRefreshHandler.firstpage("http://116.196.95.67/RestServer/api/");
-
+        mRefreshHandler.firstpage("http://116.196.95.67/RestServer/api/", getContext());
+        final EcBottomDelegate ecBottomDelegate = getParentDegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
     }
 
-    private  void  initRecyclerVIew(){
-        final GridLayoutManager manager=new GridLayoutManager(getContext(),4);
+    private void initRecyclerVIew() {
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
         mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.addItemDecoration(
+                baseDecoration
+                        .create(ContextCompat.
+                                getColor(getContext(), R.color.app_background), 6));
     }
+
+
 }

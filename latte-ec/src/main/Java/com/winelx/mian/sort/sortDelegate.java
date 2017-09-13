@@ -10,6 +10,7 @@ import com.example.latteec.ec.R;
 
 /**
  * Created by 10942 on 2017/9/8 0008.
+ * 分类
  */
 
 public class sortDelegate extends BottomItemDalegate {

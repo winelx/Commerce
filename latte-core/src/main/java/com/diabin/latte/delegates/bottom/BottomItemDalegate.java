@@ -15,7 +15,6 @@ public abstract class BottomItemDalegate extends LatteDelegate implements View.O
 
     private long mExitTime = 0;
     private static final int EXIT_TIME = 2000;
-
     /**
      * 重写返回键
      *
@@ -40,7 +39,6 @@ public abstract class BottomItemDalegate extends LatteDelegate implements View.O
         }
         return false;
     }
-
     @Override
     public void onResume() {
         super.onResume();

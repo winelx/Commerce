@@ -83,6 +83,7 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        INTEGERS.clear();
         initBanner();
     }
 

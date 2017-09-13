@@ -1,9 +1,12 @@
 package com.diabin.latte.app;
 
+import android.app.Activity;
 import android.os.Handler;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +54,7 @@ public class Configurator {
 
     public final void configure() {
         initICOn();
+        Logger.addLogAdapter(new AndroidLogAdapter());
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
     }
 
@@ -58,7 +62,10 @@ public class Configurator {
         LATTE_CONFIGS.put(ConfigType.API_HOST.name(), host);
         return this;
     }
-
+    public final Configurator withActivity(Activity activity) {
+        LATTE_CONFIGS.put(ConfigType.ACTIVITY, activity);
+        return this;
+    }
     @SuppressWarnings("unchecked")
 
     public final <T> T getConfiguration(Enum<ConfigType> key) {
